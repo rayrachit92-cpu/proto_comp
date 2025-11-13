@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Resource Finder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage" class="container">
+  <h2>College Resource Finder</h2>
+  <input type="email" id="loginEmail" placeholder="Email">
+  <input type="password" id="loginPassword" placeholder="Password">
+  <button id="loginBtn">Login</button>
+  <p style="text-align:center;margin-top:10px;">or</p>
+  <button id="showSignup">Create Account</button>
+  <p style="text-align:center;margin-top:10px;">Continue as <a href="#" id="guestLink">Guest</a></p>
+</div>
+
+<!-- SIGNUP -->
+<div id="signupPage" class="container hidden">
+  <h2>Create Account</h2>
+  <input type="text" id="signupName" placeholder="Full Name">
+  <input type="email" id="signupEmail" placeholder="Email">
+  <input type="text" id="signupMobile" placeholder="Mobile (optional)">
+  <input type="password" id="signupPassword" placeholder="Password">
+  <button id="createBtn">Sign Up</button>
+  <button id="backToLogin">Back</button>
+</div>
+
+<!-- ROLE CHOICE -->
+<div id="rolePage" class="container hidden">
+  <h2>Select Your Role</h2>
+  <div class="role-buttons">
+    <button id="openStudent">Student</button>
+    <button id="openTeacher">Teacher</button>
+    <button id="openAdmin">Admin</button>
+  </div>
+</div>
+
+<!-- STUDENT DASHBOARD -->
+<div id="studentPage" class="dashboard hidden">
+  <div class="topbar">
+    <h2>🎓 Student Dashboard</h2>
+    <button class="logout" id="logoutBtnS">Logout</button>
+  </div>
+  <p>Welcome, <b><span id="studentName"></span></b></p>
+
+  <div class="section">
+    <h3>Upload Assignments</h3>
+    <input type="file" id="stuFile">
+    <div class="file-info" id="stuFileInfo"></div>
+    <button onclick="submitUpload('stu')">Upload File</button>
+  </div>
+
+  <div class="section">
+    <h3>Available Resources</h3>
+    <div class="cards">
+      <div class="card"><h4>Math Notes</h4><p>Calculus and Linear Algebra PDFs.</p><button onclick="downloadSample('math_notes.pdf')">Download</button></div>
+      <div class="card"><h4>Programming Lab</h4><p>Java, Python, and C++ guides.</p><button onclick="downloadSample('programming_guide.pdf')">Download</button></div>
+      <div class="card"><h4>Project Ideas</h4><p>AI, IoT, and Web Dev sample ideas.</p><button onclick="downloadSample('project_ideas.txt')">Download</button></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Announcements</h3>
+    <ul>
+      <li>📅 Semester exams begin 20th Nov.</li>
+      <li>🧾 Submit assignments before 18th Nov.</li>
+      <li>🎉 Tech Fest registrations open!</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Connect with Teachers</h3>
+    <input type="text" placeholder="Type your message...">
+    <button>Send Message</button>
+  </div>
+
+  <button onclick="goHome()">⬅ Back to Role Selection</button>
+</div>
+
+<!-- TEACHER DASHBOARD -->
+<div id="teacherPage" class="dashboard hidden">
+  <div class="topbar">
+    <h2>👩‍🏫 Teacher Dashboard</h2>
+    <button class="logout" id="logoutBtnT">Logout</button>
+  </div>
+  <p>Welcome, <b><span id="teacherName"></span></b></p>
+
+  <div class="section">
+    <h3>Upload Study Materials</h3>
+    <input type="file" id="teachFile">
+    <div class="file-info" id="teachFileInfo"></div>
+    <button onclick="submitUpload('teach')">Upload Material</button>
+  </div>
+
+  <div class="section">
+    <h3>Student Submissions</h3>
+    <ul>
+      <li>Rahul Kumar – AI Assignment.pdf <button>View</button></li>
+      <li>Priya Singh – Web Project.zip <button>View</button></li>
+      <li>Aman Raj – Database Report.docx <button>View</button></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Post Announcements</h3>
+    <textarea placeholder="Write announcement..."></textarea>
+    <button>Post</button>
+  </div>
+
+  <div class="section">
+    <h3>Analytics</h3>
+    <div class="cards">
+      <div class="card"><h4>Submissions</h4><p>72% students submitted assignments.</p></div>
+      <div class="card"><h4>Attendance</h4><p>Average attendance: 88%</p></div>
+      <div class="card"><h4>Feedback</h4><p>Positive responses: 91%</p></div>
+    </div>
+  </div>
+
+  <button onclick="goHome()">⬅ Back to Role Selection</button>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="adminPage" class="dashboard hidden">
+  <div class="topbar">
+    <h2>🛠️ Admin Dashboard</h2>
+    <button class="logout" id="logoutBtnA">Logout</button>
+  </div>
+  <p>Welcome, <b><span id="adminName"></span></b></p>
+
+  <div class="section">
+    <h3>System Overview</h3>
+    <ul>
+      <li>👩‍🎓 1250 Students Registered</li>
+      <li>👨‍🏫 60 Teachers Active</li>
+      <li>📚 310 Files Uploaded</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Manage Users</h3>
+    <div class="cards">
+      <div class="card"><h4>Add User</h4><button>Add</button></div>
+      <div class="card"><h4>Remove User</h4><button>Remove</button></div>
+      <div class="card"><h4>View Reports</h4><button>Open</button></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Generate Reports</h3>
+    <button onclick="downloadSample('system_report.txt')">Download Latest Report</button>
+  </div>
+
+  <div class="section">
+    <h3>Announcements Panel</h3>
+    <textarea placeholder="Enter new announcement..."></textarea>
+    <button>Publish</button>
+  </div>
+
+  <button onclick="goHome()">⬅ Back to Role Selection</button>
+</div>
+
+<div id="fade"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
